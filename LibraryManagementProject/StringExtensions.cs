@@ -1,4 +1,6 @@
-﻿namespace LibraryManagementProject;
+﻿using System.Text.RegularExpressions;
+
+namespace LibraryManagementProject;
 
 public static class StringExtensions
 {
@@ -7,20 +9,20 @@ public static class StringExtensions
 
     public static bool IsValidEmail(this string value)
     {
-        if(string.IsNullOrEmpty(value)) return false;
+        if (string.IsNullOrWhiteSpace(value))
+            return false;
 
-        bool hasAt = false;
+        // Email regex breakdown:
+        // ^                 start of the string
+        // [^@\s]+           local part (before @): one or more chars, not @ or whitespace
+        // @                 required separator between local part and domain
+        // [^@\s]+           domain name: one or more chars, not @ or whitespace
+        // \.                literal dot before the top-level domain
+        // [^@\s.]{2,}       TLD: at least 2 chars, no @, whitespace, or extra dots
+        // $                 end of the string
+        const string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s.]{2,}$";
 
-        bool hasDot = false;
-
-        for(int i = 0; i < value.Length; i++)
-        {
-            if (value[i] == '@') hasAt = true;
-
-            if (value[i] == '.') hasDot = true;
-        }
-
-        return hasAt && hasDot;
+        return Regex.IsMatch(value, pattern, RegexOptions.IgnoreCase);
     }
 
     public static bool ContainDigit(this string value)
