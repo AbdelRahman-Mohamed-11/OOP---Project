@@ -11,15 +11,17 @@ public class BookCopy : IDisplayable, IBorrowable
 
     public string CopyId { get; set; } = null!;
 
-    public string Condition { get; set; } = null!;
+    // CopyCondition values: Good = 1, Fair = 2, Excellent = 3.
+    public CopyCondition Condition { get; set; }
 
+    // CopyStatus values: Available = 1, Borrowed = 2, Damaged = 3.
     public CopyStatus Status { get; set;  }
 
     public Book Book { get; set; } = null!;
 
     public BorrowTransaction? ActiveBorrowTransaction { get; set; } 
     
-    public BookCopy(string copyId, string condition, CopyStatus copyStatus, Book book)
+    public BookCopy(string copyId, CopyCondition condition, CopyStatus copyStatus, Book book)
     {
         CopyId = copyId;
         Condition = condition;

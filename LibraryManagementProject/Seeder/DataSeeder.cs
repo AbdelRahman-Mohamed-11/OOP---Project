@@ -34,10 +34,12 @@ namespace LibraryManagementProject.Seeder
 
             Book b3 = new("978-0-06-112008-4", "To Kill a Mockingbird");
 
-            BookCopy c1 = new("COPY-001", "Good", CopyStatus.Available, b1);
-            BookCopy c2 = new("COPY-002", "Fair", CopyStatus.Available, b1);
-            BookCopy c3 = new("COPY-003", "Excellent", CopyStatus.Available, b2);
-            BookCopy c4 = new("COPY-004", "Good", CopyStatus.Available, b3);
+            // CopyCondition values: Good = 1, Fair = 2, Excellent = 3.
+            // CopyStatus values: Available = 1, Borrowed = 2, Damaged = 3.
+            BookCopy c1 = new("COPY-001", CopyCondition.Good, CopyStatus.Available, b1);
+            BookCopy c2 = new("COPY-002", CopyCondition.Fair, CopyStatus.Available, b1);
+            BookCopy c3 = new("COPY-003", CopyCondition.Excellent, CopyStatus.Available, b2);
+            BookCopy c4 = new("COPY-004", CopyCondition.Good, CopyStatus.Available, b3);
 
             branch.AddBookCopy(c1);
             branch.AddBookCopy(c2);
